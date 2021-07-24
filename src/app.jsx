@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-import Input from "./components/atoms/Input";
 import Button from "./components/atoms/Button";
 import Dialog from "./components/molecules/Dialog";
 import Navigation from "./components/organisms/Navigation";
@@ -54,7 +53,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <>
         <Navigation />
-        <Input />
         <Button size="large">BUTTON</Button>
         <Button size="large" color="gray">
           BUTTON
