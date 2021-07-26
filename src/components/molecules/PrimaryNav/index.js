@@ -22,7 +22,7 @@ const StyledNav = styled.nav`
   }
 `;
 
-const PrimaryNav = props => {
+const PrimaryNav = ({ onSearch, ...props }) => {
   return (
     <ThemeContext.Consumer>
       {theme => (
@@ -37,7 +37,7 @@ const PrimaryNav = props => {
               Sample page
             </Link>
           </li>
-          <Search />
+          <Search onSearch={onSearch} />
           <Image
             alt="이미지"
             imgSrc="https://yt3.ggpht.com/yti/APfAmoF5LpsxlO9FFDXDiSliICHgjmcYhN0Z-HR91yUMdw=s48-c-k-c0x00ffffff-no-rj"

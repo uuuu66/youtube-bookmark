@@ -26,12 +26,12 @@ const StyledInput = styled.input`
   ${styles}
 `;
 
-const Input = ({ ...props }) => {
+const Input = ({ onKeyPress, ...props }) => {
   const { type } = props;
   if (type === "textarea") {
     return <StyledTextarea {...props} />;
   }
-  return <StyledInput {...props} />;
+  return <StyledInput onKeyPress={onKeyPress} {...props} />;
 };
 
 Input.defaultProps = {

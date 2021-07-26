@@ -25,14 +25,14 @@ const InnerWrapper = styled.div`
   }
 `;
 
-const Navigation = props => {
+const Navigation = ({ onSearch, ...props }) => {
   return (
     <Wrapper {...props}>
       <InnerWrapper>
         <LogoImage />
         <Title level={1}>Youtube</Title>
 
-        <PrimaryNav />
+        <PrimaryNav onSearch={onSearch} />
       </InnerWrapper>
     </Wrapper>
   );
