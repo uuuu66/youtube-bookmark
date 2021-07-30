@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../../atoms/Input";
 import Image from "../../atoms/Image";
@@ -9,22 +9,35 @@ const StyledSearch = styled.div`
 `;
 
 const Search = ({ onSearch, ...props }) => {
-  const handelSearch = e => {
-    console.log("enter", e.value);
-    onSearch(e.value);
+  const [input, setInput] = useState("");
+
+  const onChange = e => {
+    setInput(e.target.value);
   };
+
+  const handelSearch = () => {
+    onSearch(input);
+  };
+
   const onClick = () => {
     handelSearch();
   };
+
   const onKeyPress = event => {
     if (event.key === "Enter") {
-      handelSearch(event.target);
+      handelSearch();
     }
   };
 
   return (
     <StyledSearch>
-      <Input type="search" placeholder="Search..." onKeyPress={onKeyPress} />
+      <Input
+        type="search"
+        placeholder="Search..."
+        value={input}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
       <Button type="submit" size="square" color="gray" onClick={onClick}>
         <Image alt="search" size="small" imgSrc="../../images/search.png" />
       </Button>

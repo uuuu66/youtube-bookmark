@@ -8,7 +8,7 @@ const VideoItem = ({ video: { snippet } }) => (
       uploadedName={snippet.channelTitle}
       uploadedDate={snippet.publishedAt}
       profileSrc={snippet.thumbnails.default.url}
-      thumbnailSrc={snippet.thumbnails.standard.url}
+      thumbnailSrc={snippet.thumbnails.high.url}
     />
   </li>
 );

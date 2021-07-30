@@ -18,32 +18,33 @@ const theme = {
   }),
 };
 
-function App() {
+function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [dialog, setDialog] = useState(false);
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch(
-      `${process.env.REACT_APP_YOUTUBE_API_URL}/videos?part=snippet&chart=mostPopular&maxResults=25&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`,
-      requestOptions
-    )
-      .then(response => response.json())
-      .then(result => setVideos(result.items))
+  const search = query => {
+    youtube
+      .search(query)
+      .then(videos => setVideos(videos))
       .catch(error => console.log("error", error));
-  }, []);
+  };
+
+  useEffect(() => {
+    youtube
+      .mostPopular()
+      .then(videos => setVideos(videos))
+      .catch(error => console.log("error", error));
+  }, [youtube]);
 
   const onClick = () => {
     setDialog(true);
   };
+
   const onConfirm = () => {
     console.log("확인");
     setDialog(false);
   };
+
   const onCancel = () => {
     console.log("취소");
     setDialog(false);
@@ -52,7 +53,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <Navigation />
+        <Navigation onSearch={search} />
         <Button size="large">BUTTON</Button>
         <Button size="large" color="gray">
           BUTTON
