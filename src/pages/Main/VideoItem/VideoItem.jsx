@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../../../components/molecules/Card";
 
-const VideoItem = ({ video: { snippet } }) => (
+const VideoItem = ({ onVideoClick, video, video: { snippet } }) => (
   <li>
     <Card
       title={snippet.title}
@@ -9,6 +9,7 @@ const VideoItem = ({ video: { snippet } }) => (
       uploadedDate={snippet.publishedAt}
       profileSrc={snippet.thumbnails.default.url}
       thumbnailSrc={snippet.thumbnails.high.url}
+      onClick={() => onVideoClick(video)}
     />
   </li>
 );

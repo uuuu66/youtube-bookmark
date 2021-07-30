@@ -4,14 +4,16 @@ import styled from "styled-components";
 
 const StyledCardList = styled.ul`
   display: flex;
+  flex: ${props => props.display === "list" && "1 1 30%"};
+  flex-direction: ${props => (props.display === "list" ? "column" : "row")};
   flex-wrap: wrap;
   list-style: none;
 `;
 
-const VideoList = props => (
-  <StyledCardList>
-    {props.videos.map(video => (
-      <VideoItem key={video.id} video={video} />
+const VideoList = ({ videos, onVideoClick, display }) => (
+  <StyledCardList display={display}>
+    {videos.map(video => (
+      <VideoItem key={video.id} video={video} onVideoClick={onVideoClick} />
     ))}
   </StyledCardList>
 );

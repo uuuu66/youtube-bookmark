@@ -5,6 +5,7 @@ import Dialog from "./components/molecules/Dialog";
 import Navigation from "./components/organisms/Navigation";
 import Card from "./components/molecules/Card";
 import VideoList from "./pages/Main/VideoList/VideoList";
+import VideoDetail from "./pages/Detail";
 
 const theme = {
   palette: Object.freeze({
@@ -20,12 +21,16 @@ const theme = {
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [dialog, setDialog] = useState(false);
 
   const search = query => {
+    setSelectedVideo(null);
     youtube
       .search(query)
-      .then(videos => setVideos(videos))
+      .then(videos => {
+        setVideos(videos);
+      })
       .catch(error => console.log("error", error));
   };
 
@@ -35,6 +40,11 @@ function App({ youtube }) {
       .then(videos => setVideos(videos))
       .catch(error => console.log("error", error));
   }, [youtube]);
+
+  const selectVideo = video => {
+    console.log("selectVidoe", video);
+    setSelectedVideo(video);
+  };
 
   const onClick = () => {
     setDialog(true);
@@ -73,7 +83,20 @@ function App({ youtube }) {
           데이터를 정말로 삭제하시겠습니까?
         </Dialog>
         <Card />
-        <VideoList videos={videos} />
+        <section>
+          {selectedVideo && (
+            <div>
+              <VideoDetail video={selectedVideo} />
+            </div>
+          )}
+          <div>
+            <VideoList
+              videos={videos}
+              onVideoClick={selectVideo}
+              display={selectedVideo ? "list" : "grid"}
+            />
+          </div>
+        </section>
       </>
     </ThemeProvider>
   );
