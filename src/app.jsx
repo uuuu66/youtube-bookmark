@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ThemeProvider } from "styled-components";
 import Button from "./components/atoms/Button";
 import Dialog from "./components/molecules/Dialog";
 import Navigation from "./components/organisms/Navigation";
-import Card from "./components/molecules/Card";
 import VideoList from "./pages/Main/VideoList/VideoList";
 import VideoDetail from "./pages/Detail";
 
@@ -24,15 +23,18 @@ function App({ youtube }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [dialog, setDialog] = useState(false);
 
-  const search = query => {
-    setSelectedVideo(null);
-    youtube
-      .search(query)
-      .then(videos => {
-        setVideos(videos);
-      })
-      .catch(error => console.log("error", error));
-  };
+  const search = useCallback(
+    query => {
+      setSelectedVideo(null);
+      youtube
+        .search(query)
+        .then(videos => {
+          setVideos(videos);
+        })
+        .catch(error => console.log("error", error));
+    },
+    [youtube]
+  );
 
   useEffect(() => {
     youtube
@@ -82,7 +84,7 @@ function App({ youtube }) {
         >
           데이터를 정말로 삭제하시겠습니까?
         </Dialog>
-        <Card />
+
         <section>
           {selectedVideo && (
             <div>

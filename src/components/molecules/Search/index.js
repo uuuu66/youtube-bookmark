@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import Input from "../../atoms/Input";
 import Image from "../../atoms/Image";
@@ -8,7 +8,8 @@ const StyledSearch = styled.div`
   display: flex;
 `;
 
-const Search = ({ onSearch, ...props }) => {
+const Search = memo(({ onSearch, ...props }) => {
+  console.log("search!!!");
   const [input, setInput] = useState("");
 
   const onChange = e => {
@@ -43,6 +44,6 @@ const Search = ({ onSearch, ...props }) => {
       </Button>
     </StyledSearch>
   );
-};
+});
 
 export default Search;

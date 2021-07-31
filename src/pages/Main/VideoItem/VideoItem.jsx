@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Card from "../../../components/molecules/Card";
 
-const VideoItem = ({ onVideoClick, video, video: { snippet } }) => (
+const VideoItem = memo(({ onVideoClick, video, video: { snippet } }) => (
   <li>
     <Card
       title={snippet.title}
@@ -12,6 +12,6 @@ const VideoItem = ({ onVideoClick, video, video: { snippet } }) => (
       onClick={() => onVideoClick(video)}
     />
   </li>
-);
+));
 
 export default VideoItem;
