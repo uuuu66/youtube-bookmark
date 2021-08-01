@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Title from "../../components/atoms/Title";
 
 const StyledCardDetail = styled.div`
   flex: 1 1 70%;
@@ -21,8 +22,8 @@ const VideoDetail = ({ video, video: { snippet } }) => (
       frameBorder="0"
       allowFullScreen
     ></iframe>
-    <h2>{snippet.title}</h2>
-    <h3>{snippet.channelTitle}</h3>
+    <Title level={2}>{snippet.title}</Title>
+    <Title level={3}>{snippet.channelTitle}</Title>
     <pre className="description">{snippet.description}</pre>
   </StyledCardDetail>
 );

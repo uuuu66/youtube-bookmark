@@ -8,6 +8,10 @@ const StyledCardList = styled.ul`
   flex-direction: ${props => (props.display === "list" ? "column" : "row")};
   flex-wrap: wrap;
   list-style: none;
+
+  @media screen and (max-width: 48rem) {
+    flex-direction: column;
+  }
 `;
 
 const VideoList = ({ videos, onVideoClick, display }) => (
